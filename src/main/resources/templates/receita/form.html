@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+
+<meta charset="UTF-8">
+
+<div layout:fragment="content">
+<div class="alert alert-primary mt-10" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+<div class="section-top-border">
+	<div class="row">
+		<div class="col-lg-8 col-md-8">
+		<h3 class="mb-30">Nova Receita</h3>
+			
+			<form id="formReceita" method="POST" th:object="${receita}" th:action="@{/receita/editar}">
+				<input type="hidden" th:field="*{id}">
+				
+				<div class="mt-10" style="display:flex">							
+					<label for="nomeReceita" style="align-self: center">Título:</label> 
+					<input type="text" style="margin-left: 10px" name="nomeReceita" placeholder="Nome da Receita"
+						onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nome da Receita'" required
+						class="single-input" th:field="*{nomeReceita}"></input>
+					<div class="text-danger" th:if="${#fields.hasErrors('nomeReceita')}" th:errors="*{nomeReceita}"></div>
+				</div>				  
+				
+				
+						
+				<div class="mt-10">												
+					<label for="ingredientes">Ingredientes:</label> 
+					<textarea class="single-textarea" placeholder="Ingredientes" onfocus="this.placeholder = ''"
+						onblur="this.placeholder = 'Ingredientes'" required th:field="*{listaItemStringona}"></textarea>
+				</div>
+		
+					
+				
+				<div class="mt-10">												
+					<label for="modoPreparo">Modo de Preparo:</label> 
+					<textarea class="single-textarea" placeholder="Modo de Preparo" onfocus="this.placeholder = ''"
+						onblur="this.placeholder = 'Modo de Preparo'" required th:field="*{modoPreparo}"></textarea>
+				</div>
+				
+				<div class="single-element-widget mt-30" style="display:flex">	
+				<label for="tempoPreparo" style="align-self: center">Tempo de Preparo:</label> 						
+					<div class="default-select" id="default-select">
+						<select class="nice-select current"  style="margin-left: 10px" th:field="*{tempoPreparo}">
+							<option value=" 30 min">30 min</option>
+							<option value="1h">1h</option>
+							<option value="2h">2h</option>
+							<option value="3h">3h</option>
+							<option value="4h">4h+</option>
+						</select>									
+					</div>
+				</div>							
+				
+				<div class="single-element-widget mt-30" style="display:flex">	
+					<label for="rendimento" style="align-self: center">Rendimento:</label> 
+					<div class="default-select" id="default-select">
+						<select class="nice-select current" style="margin-left: 10px" th:field="*{rendimento}">
+							<option value="1 pessoa">1 pessoa</option>
+							<option value="2 pessoas">2 pessoas</option>
+							<option value="3 pessoas">3 pessoas</option>
+							<option value="4 pessoas">4 pessoas</option>
+							<option value="5 pessoas">5 pessoas</option>										
+							<option value="10 pessoas">10 pessoas</option>
+						</select>
+					</div>
+				</div>
+				<div class="single-element-widget mt-30" style="display:flex">	
+				<label for="dificuldade" style="align-self: center">Dificuldade:</label> 						
+					<div class="default-select" id="default-select">
+						<select class="nice-select current" style="margin-left: 10px" th:field="*{dificuldade}">
+							<option value="Iniciante">Iniciante</option>
+							<option value="Intermediário">Intermediário</option>
+							<option value="Avançado">Avançado</option>
+						</select>
+					</div>
+				</div>
+				<div>
+                       <button type="submit" class="genric-btn success circle mt-10">Salvar</button>		                     
+                   </div>
+			</form>
+			<form method="POST" th:object="${item}" th:action="@{/item/editar}"></form>
+	</div>
+</div>
+</div>
+
+
+</div>
+
+</html>

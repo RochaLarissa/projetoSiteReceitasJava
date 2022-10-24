@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<meta charset="UTF-8">
+
+<div layout:fragment="content">
+	<div class="alert alert-primary mt-10" th:if="${#lists.isEmpty(lista)}">
+			Nenhuma receita encontrada</div>
+	<div class="alert alert-primary mt-10" th:if="${mensagem != null}"
+	th:text="${mensagem}"></div>
+<div class="whole-wrap">
+<div class="section-top-border">
+	<div class="row">
+		<div class="col-lg-8 col-md-8">
+		<h3 class="mb-30">Pesquisar Receita</h3>
+			<form method="GET">
+				<div class="mt-10">							
+					<input type="text" name="nomeReceita" placeholder="Pelo nome da receita"
+						onfocus="this.placeholder = ''" onblur="this.placeholder = 'Pesquisar pelo nome da receita'" 
+						class="single-input" th:value="${nomeReceita}"></input>
+				</div>
+				<div class="mt-10">							
+					<input type="text" name="nomeIngrediente" placeholder="Pelo nome do ingrediente"
+						onfocus="this.placeholder = ''" onblur="this.placeholder = 'Pesquisar por ingrediente na receita'" 
+						class="single-input" th:value="${nomeIngrediente}"></input>
+				</div>
+				<div>
+                     <button type="submit" class="genric-btn success circle mt-10">Pesquisar</button>		                     
+                </div>
+			</form>
+		</div>
+	</div>
+</div>
+		<div class="container box_1170" th:if="${not #lists.isEmpty(lista)}">
+			<div class="section-top-border">
+		
+				<h3 class="mb-30">Receitas Cadastradas</h3>
+				
+					<div class="progress-table">
+						<div class="table-head">							
+							<div class="country">Nome</div>
+							<div class="visit">Opções</div>
+							
+						</div>
+							<div class="table-row" th:each="receita : ${lista}">								
+								<div class="country" th:text="${receita.nomeReceita}">									
+								</div>
+							<div class="visit">
+								<a class="genric-btn info-border circle" 
+								th:href="@{/receita/get(id=${receita.id})}">Abrir</a>							
+								<a class="genric-btn info-border circle ml-2" sec:authorize="hasAuthority('admin')"
+								th:href="@{/receita/editar(id=${receita.id})}">Editar</a>							
+								<a class="genric-btn danger-border circle ml-2" sec:authorize="hasAuthority('admin')"
+								th:href="@{/receita/excluir(id=${receita.id})}"
+								onclick="return confirm('Você realmente deseja excluir esse registro?')">Excluir</a>
+							</div>
+							</div>				
+					</div>
+			</div>
+		</div>
+					<div class="section-top-border text-center">
+                     <a class="genric-btn success circle mt-10" sec:authorize="hasAuthority('admin')" 
+                     th:href="@{/receita/editar}">Novo</a>		                     
+                	</div>
+</div>
+
+</div>
+
+</html>

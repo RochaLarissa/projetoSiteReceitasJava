@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Receitas da Palmirinha</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../static/css/owl.carousel.min.css" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" href="../static/css/magnific-popup.css" th:href="@{/css/magnific-popup.css}">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" href="../static/css/themify-icons.css" th:href="@{/css/themify-icons.css}">
+    <link rel="stylesheet" href="../static/css/nice-select.css" th:href="@{/css/nice-select.css}">
+    <link rel="stylesheet" href="../static/css/flaticon.css" th:href="@{/css/flaticon.css}">
+    <link rel="stylesheet" href="../static/css/gijgo.css" th:href="@{/css/gijgo.css}">
+    <link rel="stylesheet" href="../static/css/animate.min.css" th:href="@{/css/animate.min.css}">
+    <link rel="stylesheet" href="../static/css/slick.css" th:href="@{/css/slick.css}">
+    <link rel="stylesheet" href="../static/css/slicknav.css" th:href="@{/css/slicknav.css}">
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+</head>
+
+<body>
+
+<header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container">
+                    <div class="row align-items-center">
+                            
+                        <div class="col-xl-3 col-lg-2">
+                            <div class="white_text" style="font: Roboto; color: white">
+                                <a  sec:authentication="name">Usuário</a>
+                            </div>
+                        </div>    
+                                            
+                        <div class="col-xl-6 col-lg-7">
+                            <div class="main-menu white_text  d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a href="index.html" th:href="@{/}">Home</a></li>                                   
+                                        <li><a >Receitas <i class="ti-angle-down"></i></a>
+                                            <ul class="submenu">
+                                                <li><a href="blog.html" sec:authorize="hasAuthority('admin')" th:href="@{/receita/editar}">Nova Receita</a></li>
+                                                <li><a href="single-blog.html" th:href="@{/receita}">Listar Receitas</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a  sec:authorize="hasAuthority('admin')">Ingredientes <i class="ti-angle-down"></i></a>
+                                        	<ul class="submenu">
+                                                <li><a href="blog.html"  th:href="@{/ingrediente/editar}">Novo Ingrediente</a></li>
+                                                <li><a href="single-blog.html" th:href="@{/ingrediente}">Listar Ingredientes</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a  sec:authorize="hasAuthority('admin')">Medidas <i class="ti-angle-down"></i></a>
+                                        	<ul class="submenu">
+                                                <li><a href="blog.html" th:href="@{/unidademedida/editar}">Nova Medida</a></li>
+                                                <li><a href="single-blog.html" th:href="@{/unidademedida}">Listar Medidas</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a  sec:authorize="hasAuthority('admin')">Usuários <i class="ti-angle-down"></i></a>
+                                        	<ul class="submenu">
+                                                <li><a href="blog.html" th:href="@{/usuario/editar}">Novo Usuário</a></li>
+                                                <li><a href="single-blog.html" th:href="@{/usuario}">Listar Usuários</a></li>
+                                            </ul>
+                                        </li>
+                                        
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xl-3 col-lg-3 d-none d-lg-block" style="display:flex">
+                            <div class="search_icon" >                            
+	                            <div>  
+	                            	<form action="/logout" method="post" class="navbar-form navbar-right">
+						        		<button type="submit" class="genric-btn info-border circle">
+						        			<span class="glyphicon glyphicon-log-out"></span>
+						        			Sair
+						        		</button>
+						        		
+						        		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+							      	</form>
+	                            </div>
+                            </div>
+                       </div>   
+                       
+                       <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                        
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-end -->
+
+    <!-- bradcam_area  -->
+    <div class="bradcam_area bradcam_bg_1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text text-center">
+                        <h3>Receitas da Palmirinha</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /bradcam_area  -->
+
+    
+
+		<div id="conteudo" class="container" layout:fragment="content"></div>
+		<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
+		
+		<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<div layout:fragment="scripts">
+		
+		</div>
+
+
+
+    <!-- footer  -->
+    <footer class="footer">
+        <div class="footer_top">
+            <div class="container">
+                <div class="row justify-content-center">                      
+                    <div class="col-xl-4 col-md-6 col-lg-4">
+                            <div class="footer_widget">
+                                    <h3 class="footer_title">
+                                            Subscrever
+                                    </h3>
+                                    <p class="newsletter_text">Receba nossa newsletter,</p>
+                                    <form action="#" class="newsletter_form">
+                                        <input type="text" placeholder="Digite seu email">
+                                        <button type="submit"> <i class="ti-arrow-right"></i> </button>
+                                    </form>
+                                    
+                                </div>
+                           </div>            	
+                </div>
+            </div>
+        </div>
+        <div class="copy-right_text">
+            <div class="container">
+                <div class="footer_border"></div>
+                <div class="row align-items-center">
+                    <div class="col-xl-8 col-md-8">
+                        <p class="copy_right justify-content-center">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                    <div class="col-xl-4 col-md-4">
+                        <div class="socail_links">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <i class="ti-facebook"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="ti-twitter-alt"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-dribbble"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-behance"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+<!--/ footer  -->
+
+    <!-- JS here -->
+    <script src="../static/js/vendor/modernizr-3.5.0.min.js" th:src="@{/js/vendor/modernizr-3.5.0.min.js}"></script>
+    <script src="../static/js/vendor/jquery-1.12.4.min.js" th:src="@{/js/vendor/jquery-1.12.4.min.js}"></script>
+    <script src="../static/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+    <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="../static/js/owl.carousel.min.js" th:src="@{/js/owl.carousel.min.js}"></script>
+    <script src="../static/js/isotope.pkgd.min.js" th:src="@{/js/isotope.pkgd.min.js}"></script>
+    <script src="../static/js/ajax-form.js" th:src="@{/js/ajax-form.js}"></script>
+    <script src="../static/js/waypoints.min.js" th:src="@{/js/waypoints.min.js}"></script>
+    <script src="../static/js/jquery.counterup.min.js" th:src="@{/js/jquery.counterup.min.js}"></script>
+    <script src="../static/js/imagesloaded.pkgd.min.js" th:src="@{/js/imagesloaded.pkgd.min.js}"></script>
+    <script src="../static/js/scrollIt.js" th:src="@{/js/scrollIt.js}"></script>
+    <script src="../static/js/jquery.scrollUp.min.js" th:src="@{/js/jquery.scrollUp.min.js}"></script>
+    <script src="../static/js/wow.min.js" th:src="@{/js/wow.min.js}"></script>
+    <script src="../static/js/nice-select.min.js" th:src="@{/js/nice-select.min.js}"></script>
+    <script src="../static/js/jquery.slicknav.min.js" th:src="@{/js/jquery.slicknav.min.js}"></script>
+    <script src="../static/js/jquery.magnific-popup.min.js" th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+    <script src="../static/js/plugins.js" th:src="@{/js/plugins.js}"></script>
+    <script src="../static/js/gijgo.min.js" th:src="@{/js/gijgo.min.js}"></script>
+
+    <!--contact js-->
+    <script src="../static/js/contact.js" th:src="@{/js/contact.js}"></script>
+    <script src="../static/js/jquery.ajaxchimp.min.js" th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
+    <script src="../static/js/jquery.form.js" th:src="@{/js/jquery.form.js}"></script>
+    <script src="../static/js/jquery.validate.min.js" th:src="@{/js/jquery.validate.min.js}"></script>
+    <script src="../static/js/mail-script.js" th:src="@{/js/mail-script.js}"></script>
+
+    <script src="../static/js/main.js" th:src="@{/static/js/main.js}"></script>
+    
+    
+</body>
+</html>

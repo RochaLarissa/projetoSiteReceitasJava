@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+
+<meta charset="UTF-8">
+
+<div layout:fragment="content">
+<div class="recepie_details_area">
+        <div class="container">
+            <div class="row align-items-center">            
+            <div th:if="${message != null}">
+				<h1 th:text="${message}"></h1>
+			</div>
+                
+                <div class="col-xl-6 col-md-6">
+                    <div class="recepies_info" th:if="${receita != null}">
+                        <h3 th:text="${receita.nomeReceita}"></h3>                    
+                                                                      							
+                        <div class="resepies_details">
+                            <ul>
+                                <li>
+                                	<p><strong>Rating: </strong>
+                                		<i class="fa fa-star"></i>
+                                		<i class="fa fa-star"></i>
+                                		<i class="fa fa-star"></i>
+                                		<i class="fa fa-star"></i>
+                                		<i class="fa fa-star"></i> 
+                                	</p>
+                                </li>
+                                 
+                               	<li>
+                               		<p><strong>Tempo:</strong>
+                               		<i th:text="${receita.tempoPreparo}"></i>
+                               		</p>
+                               	</li>
+                                
+                                <li><p><strong>Rendimento</strong><i th:text="${receita.rendimento}"></i></p></li>
+                                <li><p><strong>Dificuldade</strong><i th:text="${receita.dificuldade}"></i></p></li>
+                            </ul>
+                        </div>
+                        <div class="links">
+                            <a href="#"> <i class="fa fa-facebook"></i> </a>
+                            <a href="#"> <i class="fa fa-twitter"></i> </a>
+                            <a href="#"> <i class="fa fa-linkedin"></i> </a>
+                        </div>
+                        
+                        <div class="mt-30">						
+							<h4>Ingredientes:</h4> 							
+							<div style="display:flex" th:each="item : ${receita.listaIngredientes}">
+							
+							<p class="recepies_text" th:text="${item.qtdIngrediente}"></p>&nbsp
+							<p class="recepies_text" th:text="${item.unidadeMedida.tipoUnidadeMedida}"></p>&nbsp
+							<p class="recepies_text" th:text="${item.ingrediente.nomeIngrediente}"></p>&nbsp
+							
+							</div>
+						</div>
+						
+						
+						<div class="mt-30">						
+							<div>							
+							<p class="recepies_text" th:text="${receita.listaItemStringona}">
+								</p>
+							</div>
+						</div>
+						
+						
+						
+					<div class="mt-30">		            
+		                <div>
+		                <h4>Modo de Preparo:</h4> 
+		                    <p class="recepies_text" th:text="${receita.modoPreparo}"></p>
+		                </div>		            
+        			</div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+    <div class="recepie_area inc_padding">
+        <div class="container">
+           
+        </div>
+    </div>
+
+</div>
+
+</html>

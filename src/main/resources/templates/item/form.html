@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+
+<meta charset="UTF-8">
+
+<div layout:fragment="content">
+<div class="alert alert-primary mt-10" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+<div class="section-top-border">
+				<div class="row">
+					<div class="col-lg-8 col-md-8">
+
+						<h3 class="mb-30">Novo Item</h3>
+						<form method="POST" th:object="${item}" th:action="@{/item/editar}">
+						<input type="hidden" th:field="*{id}">
+							<div class="mt-10">							
+								<input type="text" name="qtdIngrediente" placeholder="Quantidade"
+									onfocus="this.placeholder = ''" onblur="this.placeholder = 'Quantidade'" required
+									class="single-input" th:field="*{qtdIngrediente}"></input>
+								<div class="text-danger" th:if="${#fields.hasErrors('qtdIngrediente')}" th:errors="*{qtdIngrediente}"></div>
+							</div>
+							<div class="single-element-widget mt-30">							
+								<div class="default-select" id="default-select">
+									<select class="nice-select" th:field="*{unidadeMedida}">
+										<option th:each="unidadeMedida: ${listaUnidadeMedida}" th:value="${unidadeMedida.id}" 
+										th:text="${unidadeMedida.tipoUnidadeMedida}"> </option>
+									</select>
+								</div>
+							</div>
+							<div class="single-element-widget mt-30">							
+								<div class="default-select" id="default-select">
+									<select class="nice-select" th:field="*{ingrediente}">
+										<option th:each="ingrediente: ${listaIngrediente}" th:value="${ingrediente.id}" 
+										th:text="${ingrediente.nomeIngrediente}"> </option>
+									</select>
+								</div>
+							</div>
+							<div>
+		                        <button type="submit" class="genric-btn success circle mt-10">Salvar</button>		                     
+		                    </div>
+						</form>
+				</div>
+			</div>
+</div>
+
+</div>
+
+</html>

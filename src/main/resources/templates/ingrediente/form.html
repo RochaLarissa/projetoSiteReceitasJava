@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+
+<meta charset="UTF-8">
+
+<div layout:fragment="content">
+<div class="alert alert-primary mt-10" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+<div class="section-top-border">
+				<div class="row">
+					<div class="col-lg-8 col-md-8">
+
+						<h3 class="mb-30">Novo Ingrediente</h3>
+						<form method="POST" th:object="${ingrediente}" th:action="@{/ingrediente/editar}">
+						<input type="hidden" th:field="*{id}">
+							<div class="mt-10">							
+								<input type="text" name="nomeIngrediente" placeholder="Nome do Ingrediente"
+									onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nome do Ingrediente'" required
+									class="single-input" th:field="*{nomeIngrediente}"></input>
+								<div class="text-danger" th:if="${#fields.hasErrors('nomeIngrediente')}" th:errors="*{nomeIngrediente}"></div>
+							</div>
+							<div>
+		                        <button type="submit" class="genric-btn success circle mt-10">Salvar</button>		                     
+		                    </div>
+						</form>
+				</div>
+			</div>
+</div>
+
+</div>
+
+</html>

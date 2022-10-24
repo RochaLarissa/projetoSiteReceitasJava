@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+
+<meta charset="UTF-8">
+
+<div layout:fragment="content">
+	<div class="alert alert-primary mt-10" th:if="${#lists.isEmpty(lista)}">
+			Nenhum item encontrado</div>
+	<div class="alert alert-primary mt-10" th:if="${mensagem != null}"
+	th:text="${mensagem}"></div>
+<div class="whole-wrap">
+<div class="section-top-border">
+	<div class="row">
+		<div class="col-lg-8 col-md-8">
+		<h3 class="mb-30">Pesquisar</h3>
+			<form method="GET">
+				<div class="mt-10">							
+					<input type="text" name="nomeIngrediente" placeholder="Pesquisar Item por Ingrediente"
+						onfocus="this.placeholder = ''" onblur="this.placeholder = 'Pesquisar Item por Ingrediente'" required
+						class="single-input" th:value="${nomeIngrediente}"></input>
+				</div>
+				<div>
+                     <button type="submit" class="genric-btn success circle mt-10">Pesquisar</button>		                     
+                </div>
+			</form>
+		</div>
+	</div>
+</div>
+		<div class="container box_1170" th:if="${not #lists.isEmpty(lista)}">
+			<div class="section-top-border">
+				<h3 class="mb-30">Itens Cadastrados</h3>
+				<div class="progress-table-wrap">
+					<div class="progress-table">
+						<div class="table-head">
+							
+							<div class="country">Quantidade</div>
+							<div class="country">Unidade de Medida</div>
+							<div class="percentage">Ingrediente</div>
+							<div class="country">Opções</div>
+							
+						</div>
+							<div class="table-row" th:each="item : ${lista}">
+								
+								<div class="country" th:text="${item.qtdIngrediente}"></div>
+								<div class="country" th:text="${item.unidadeMedida.tipoUnidadeMedida}"></div>
+								<div class="percentage" th:text="${item.ingrediente.nomeIngrediente}"></div>					
+							<div class="country">
+								<a class="genric-btn info-border circle" 
+								th:href="@{/item/editar(id=${item.id})}">Editar</a>							
+								<a class="genric-btn danger-border circle ml-2"
+								th:href="@{/item/excluir(id=${item.id})}"
+								onclick="return confirm('Você realmente deseja excluir esse registro?')">Excluir</a>
+							</div>
+							</div>				
+					</div>
+				</div>
+			</div>
+		</div>
+					<div class="section-top-border text-center">
+                     <a class="genric-btn success-border circle mt-10" th:href="@{/item/editar}">Novo</a>		                     
+                	</div>
+</div>
+
+</div>
+
+</html>
